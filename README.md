@@ -38,7 +38,7 @@ CryptoFlow Agent focuses on those questions with a small, auditable codebase and
 ## Highlights
 
 - **Protocol identification:** TLS, QUIC, SSH, and port-based `*-like` fallbacks.
-- **Explainable detection:** every result includes reasons and confidence.
+- **Explainable detection:** every result includes reasons, confidence, and rich flow features.
 - **TLS ClientHello metadata:** extracts SNI, ALPN, client version, and supported versions when present.
 - **Multiple inputs:** classic PCAP, simple JSONL, and Suricata EVE JSONL.
 - **Pipeline-friendly outputs:** table, JSON, or CSV.
@@ -52,7 +52,7 @@ CryptoFlow Agent focuses on those questions with a small, auditable codebase and
 | TLS | TLS record headers, common TLS ports, optional ClientHello metadata |
 | QUIC | UDP long-header shape and common QUIC ports |
 | SSH | SSH banners and common SSH ports |
-| Unknown encrypted | entropy, printable ratio, packet count, and payload-size heuristics |
+| Unknown encrypted | entropy, printable ratio, timing, directionality, and payload-size heuristics |
 | Plain or unknown | conservative fallback when no strong encrypted signal is present |
 
 ## Install
@@ -134,6 +134,18 @@ cryptoflow-agent examples/sample_eve.jsonl --format eve --output json
 
 When EVE events include `payload` or `payload_printable`, CryptoFlow Agent uses those bytes for protocol signatures. If payload bytes are absent, it falls back to ports and flow metadata.
 
+
+## Flow features
+
+CryptoFlow Agent now extracts a broader feature set for detection, triage, and downstream analytics:
+
+- **Volume:** packet count, byte count, payload bytes, payload packet ratio.
+- **Packet sizes:** min, max, mean, standard deviation, p25, p50, p75, coefficient of variation.
+- **Timing:** duration, inter-arrival min/max/mean/stddev/CV, bytes per second, packets per second.
+- **Directionality:** forward/reverse packet and byte counts, forward ratios, byte asymmetry, packet asymmetry, direction changes.
+- **Endpoint context:** source/destination port class, private/global IP flags, IPv4/IPv6 flags, parse-error flags.
+- **Payload shape:** entropy and printable byte ratio.
+
 ## Output formats
 
 ### Table
@@ -194,7 +206,7 @@ flowchart LR
 CryptoFlow Agent combines two layers:
 
 1. **Deterministic signatures** for recognizable protocol shapes such as TLS records, QUIC long headers, and SSH banners.
-2. **Explainable heuristics** for unknown encrypted-looking traffic using entropy, printable byte ratio, packet count, and size statistics.
+2. **Explainable heuristics** for unknown encrypted-looking traffic using entropy, printable byte ratio, timing, directionality, port class, IP scope, packet count, and size statistics.
 
 The goal is not to be magical; the goal is to be useful, transparent, and easy to extend.
 
@@ -212,7 +224,10 @@ The goal is not to be magical; the goal is to be useful, transparent, and easy t
   "features": {
     "packet_count": 2.0,
     "payload_entropy": 2.1327,
-    "printable_ratio": 0.0312
+    "printable_ratio": 0.0312,
+    "forward_packet_ratio": 0.5,
+    "byte_asymmetry": 0.0,
+    "direction_changes": 1.0
   }
 }
 ```

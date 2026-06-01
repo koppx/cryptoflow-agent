@@ -10,6 +10,10 @@ from typing import Iterable, List
 from .models import DetectionResult
 
 
+def _format_float(features: dict, name: str) -> str:
+    return f"{float(features.get(name, 0.0)):.4f}"
+
+
 def results_to_json(results: Iterable[DetectionResult], indent: int = 2) -> str:
     """Render results as JSON."""
     return json.dumps([result.as_dict() for result in results], indent=indent, sort_keys=True)
@@ -32,6 +36,13 @@ def results_to_csv(results: Iterable[DetectionResult]) -> str:
             "packet_count",
             "byte_count",
             "payload_entropy",
+            "bytes_per_second",
+            "packets_per_second",
+            "forward_packet_ratio",
+            "forward_byte_ratio",
+            "byte_asymmetry",
+            "packet_asymmetry",
+            "direction_changes",
             "reasons",
         ],
     )
@@ -51,6 +62,13 @@ def results_to_csv(results: Iterable[DetectionResult]) -> str:
                 "packet_count": int(result.features.get("packet_count", 0)),
                 "byte_count": int(result.features.get("byte_count", 0)),
                 "payload_entropy": f"{float(result.features.get('payload_entropy', 0.0)):.4f}",
+                "bytes_per_second": _format_float(result.features, "bytes_per_second"),
+                "packets_per_second": _format_float(result.features, "packets_per_second"),
+                "forward_packet_ratio": _format_float(result.features, "forward_packet_ratio"),
+                "forward_byte_ratio": _format_float(result.features, "forward_byte_ratio"),
+                "byte_asymmetry": _format_float(result.features, "byte_asymmetry"),
+                "packet_asymmetry": _format_float(result.features, "packet_asymmetry"),
+                "direction_changes": int(result.features.get("direction_changes", 0)),
                 "reasons": "; ".join(result.reasons),
             }
         )
