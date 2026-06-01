@@ -1,6 +1,6 @@
 # CryptoFlow Agent
 
-![CI](https://github.com/your-org/cryptoflow-agent/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/koppx/cryptoflow-agent/actions/workflows/ci.yml/badge.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 
@@ -28,7 +28,7 @@ CryptoFlow Agent is a defensive, open-source Python agent for encrypted traffic 
 ## Installation
 
 ```bash
-python -m pip install git+https://github.com/your-org/cryptoflow-agent.git
+python -m pip install git+https://github.com/koppx/cryptoflow-agent.git
 ```
 
 For local development from a clone:
@@ -127,9 +127,17 @@ flowchart LR
     F --> G[Table or JSON report]
 ```
 
+
+## Maintenance automation
+
+This repository includes weekly maintenance automation:
+
+- `.github/workflows/weekly-maintenance.yml` runs lint, tests, and CLI smoke checks every Monday.
+- `.github/dependabot.yml` checks Python and GitHub Actions dependencies weekly.
+- See `docs/maintenance.md` for the weekly review checklist and optimization backlog.
+
 ## Repository checklist before publishing
 
-- Replace `your-org` in the badge and installation URL with your GitHub organization or username.
 - Enable GitHub Actions.
 - Configure a private vulnerability reporting contact in GitHub Security settings.
 - Add sanitized examples only; never commit private captures.

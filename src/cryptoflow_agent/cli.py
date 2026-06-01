@@ -24,7 +24,9 @@ def _iter_jsonl(handle: TextIO) -> Iterable[Packet]:
         payload = item.get("payload", "")
         if isinstance(payload, str):
             payload_bytes = (
-                bytes.fromhex(payload) if item.get("payload_encoding") == "hex" else payload.encode()
+                bytes.fromhex(payload)
+                if item.get("payload_encoding") == "hex"
+                else payload.encode()
             )
         else:
             payload_bytes = bytes(payload)
@@ -54,7 +56,9 @@ def build_parser() -> argparse.ArgumentParser:
         prog="cryptoflow-agent",
         description="Detect and identify encrypted traffic from PCAP or JSONL packet summaries.",
     )
-    parser.add_argument("input", help="Path to .pcap/.jsonl/.eve.json input, or '-' for JSONL stdin")
+    parser.add_argument(
+        "input", help="Path to .pcap/.jsonl/.eve.json input, or '-' for JSONL stdin"
+    )
     parser.add_argument(
         "--format",
         choices=["auto", "pcap", "jsonl", "eve"],

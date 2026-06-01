@@ -66,7 +66,11 @@ def results_to_table(results: List[DetectionResult]) -> str:
     for result in results:
         src_ip, src_port, dst_ip, dst_port, proto = result.flow_key
         flow = f"{proto} {src_ip}:{src_port} <-> {dst_ip}:{dst_port}"
-        lines.append(f"{str(result.encrypted):<10} {result.protocol:<18} {result.confidence:<10.2f} {flow}")
+        lines.append(
+            f"{str(result.encrypted):<10} "
+            f"{result.protocol:<18} "
+            f"{result.confidence:<10.2f} {flow}"
+        )
         for reason in result.reasons:
             lines.append(f"  - {reason}")
     return "\n".join(lines)

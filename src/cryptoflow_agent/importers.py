@@ -40,7 +40,9 @@ def iter_suricata_eve_jsonl(handle: TextIO) -> Iterable[Packet]:
         if not src_ip or not dst_ip:
             continue
         yield Packet(
-            timestamp=float(line_number if timestamp is None else _timestamp_to_float(timestamp, line_number)),
+            timestamp=float(
+                line_number if timestamp is None else _timestamp_to_float(timestamp, line_number)
+            ),
             src_ip=str(src_ip),
             src_port=int(src_port or 0),
             dst_ip=str(dst_ip),

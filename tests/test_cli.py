@@ -20,7 +20,16 @@ def test_cli_missing_file(capsys):
 
 
 def test_cli_csv_output(capsys):
-    code = main(["examples/sample_packets.jsonl", "--format", "jsonl", "--output", "csv", "--only-encrypted"])
+    code = main(
+        [
+            "examples/sample_packets.jsonl",
+            "--format",
+            "jsonl",
+            "--output",
+            "csv",
+            "--only-encrypted",
+        ]
+    )
 
     assert code == 0
     out = capsys.readouterr().out

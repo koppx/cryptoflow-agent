@@ -11,10 +11,20 @@ def _client_hello() -> bytes:
 
     sni_name = b"example.com"
     sni = b"\x00" + len(sni_name).to_bytes(2, "big") + sni_name
-    sni_ext = b"\x00\x00" + (len(sni) + 2).to_bytes(2, "big") + len(sni).to_bytes(2, "big") + sni
+    sni_ext = (
+        b"\x00\x00"
+        + (len(sni) + 2).to_bytes(2, "big")
+        + len(sni).to_bytes(2, "big")
+        + sni
+    )
 
     alpn_body = b"\x02h2\x08http/1.1"
-    alpn_ext = b"\x00\x10" + (len(alpn_body) + 2).to_bytes(2, "big") + len(alpn_body).to_bytes(2, "big") + alpn_body
+    alpn_ext = (
+        b"\x00\x10"
+        + (len(alpn_body) + 2).to_bytes(2, "big")
+        + len(alpn_body).to_bytes(2, "big")
+        + alpn_body
+    )
 
     versions = b"\x04\x03\x04\x03\x03"
     versions_ext = b"\x00\x2b" + len(versions).to_bytes(2, "big") + versions

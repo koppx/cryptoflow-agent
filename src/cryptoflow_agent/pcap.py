@@ -100,7 +100,9 @@ def _parse_ethernet_ipv4(frame: bytes, timestamp: float) -> Optional[Packet]:
     if proto == UDP_PROTO:
         if len(frame) < transport_offset + 8:
             return None
-        src_port, dst_port, udp_len = struct.unpack("!HHH", frame[transport_offset : transport_offset + 6])
+        src_port, dst_port, udp_len = struct.unpack(
+            "!HHH", frame[transport_offset : transport_offset + 6]
+        )
         payload_offset = transport_offset + 8
         udp_end = min(ip_end, transport_offset + udp_len)
         return Packet(
