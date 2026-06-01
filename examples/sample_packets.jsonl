@@ -1,0 +1,3 @@
+{"timestamp": 1.0, "src_ip": "10.0.0.2", "src_port": 53120, "dst_ip": "93.184.216.34", "dst_port": 443, "protocol": "TCP", "payload_encoding": "hex", "payload": "160303002e0100002a0303aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}
+{"timestamp": 1.1, "src_ip": "93.184.216.34", "src_port": 443, "dst_ip": "10.0.0.2", "dst_port": 53120, "protocol": "TCP", "payload_encoding": "hex", "payload": "1703030010bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"}
+{"timestamp": 2.0, "src_ip": "10.0.0.4", "src_port": 52000, "dst_ip": "10.0.0.5", "dst_port": 80, "protocol": "TCP", "payload": "GET / HTTP/1.1\r\nHost: example.test\r\n\r\n"}

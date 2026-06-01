@@ -1,0 +1,41 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cryptoflow-agent"
+version = "0.1.0"
+description = "A defensive agent for encrypted traffic detection and lightweight protocol identification."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{ name = "cryptoflow-agent contributors" }]
+keywords = ["network-security", "encrypted-traffic", "tls", "quic", "ssh", "pcap", "ids"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Information Technology",
+  "Intended Audience :: System Administrators",
+  "Topic :: Security",
+  "Topic :: System :: Networking :: Monitoring",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = []
+
+[project.optional-dependencies]
+ml = ["scikit-learn>=1.2", "joblib>=1.2"]
+dev = ["pytest>=7.0", "ruff>=0.4"]
+
+[project.scripts]
+cryptoflow-agent = "cryptoflow_agent.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/cryptoflow_agent"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

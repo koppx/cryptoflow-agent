@@ -1,0 +1,2 @@
+{"timestamp":"2026-01-01T00:00:00.000000+0000","event_type":"flow","src_ip":"10.0.0.2","src_port":53120,"dest_ip":"93.184.216.34","dest_port":443,"proto":"TCP","payload":"FgMDAC4BAAAqAwOqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqg=="}
+{"timestamp":"2026-01-01T00:00:01.000000+0000","event_type":"flow","src_ip":"10.0.0.4","src_port":52000,"dest_ip":"10.0.0.5","dest_port":80,"proto":"TCP","payload_printable":"GET / HTTP/1.1\r\nHost: example.test\r\n\r\n"}
