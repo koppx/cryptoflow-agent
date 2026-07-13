@@ -1,9 +1,6 @@
 name: weekly-maintenance
 
 on:
-  schedule:
-    # Every Monday at 02:00 UTC / 10:00 Asia/Shanghai.
-    - cron: "0 2 * * 1"
   workflow_dispatch:
 
 permissions:
