@@ -27,7 +27,7 @@ jobs:
           cryptoflow-agent examples/sample_eve.jsonl --format eve --output csv
       - name: Open maintenance issue on failure
         if: failure()
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           script: |
             const title = `Weekly maintenance failed: ${new Date().toISOString().slice(0, 10)}`;
